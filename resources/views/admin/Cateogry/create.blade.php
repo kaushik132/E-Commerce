@@ -9,7 +9,7 @@
                     <h1>Create Category</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="categories.html" class="btn btn-primary">Back</a>
+                    <a href="#" class="btn btn-primary">Back</a>
                 </div>
             </div>
         </div>
@@ -18,7 +18,10 @@
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
+   
         <div class="container-fluid">
+            <form action=""  id="categoryForm" name="categoryForm"> 
+         
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -50,10 +53,11 @@
                 </div>
             </div>
             <div class="pb-5 pt-3">
-                <button class="btn btn-primary">Create</button>
-                <a href="brands.html" class="btn btn-outline-dark ml-3">Cancel</a>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="#" class="btn btn-outline-dark ml-3">Cancel</a>
             </div>
         </div>
+    </form>
         <!-- /.card -->
     </section>
     <!-- /.content -->
@@ -61,7 +65,24 @@
 
 @section('costomjs')
     <script>
-        console.log('hello');
+    $("#categoryForm").submit(function(event){
+        event.preventDefault();
+        var element = $(this);
+
+        $.ajax({
+          url: '{{route('categories.store')}}',
+          type: 'post',
+          data: element.serializeArray(),
+          dataType: 'json',
+          success: function(response){
+
+          }, error: function(jqXHR, exception){
+            console.log("Something went wrong");
+            
+          }
+          
+        })
+    });
     </script>
 @endsection
 @endsection
